@@ -1,0 +1,10 @@
+{
+    "parserOptions": {
+        "project": ["tsconfig.json"]
+    },
+    "extends": ["plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
+    "rules": {
+        "@typescript-eslint/no-var-requires": "off"
+    },
+    "ignorePatterns": ["migrations/**/*"]
+}

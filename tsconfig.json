@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "outDir": "dist",
+        "baseUrl": ".",
+        "allowJs": true,
+        "module": "commonjs"
+    },
+    "include": ["**/*.ts", "**/*.tsx"],
+    "exclude": ["node_modules", "migrations"]
+}
