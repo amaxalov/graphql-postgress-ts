@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "outDir": "./build/",
+    "lib": ["es6", "dom"],
+    "esModuleInterop": true,
+    "rootDir": "src",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "types": ["react", "node", "jest"]
+  },
+  "include": ["./src/"]
+}
