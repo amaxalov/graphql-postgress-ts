@@ -7,3 +7,11 @@ export const ADD_MAGE = gql`
     }
   }
 `
+
+export const UPDATE_MAGE = gql`
+  mutation updateMage($id: Int!, $name: String!, $age: Int!) {
+    updateMage(id: $id, name: $name, age: $age) {
+      name
+    }
+  }
+`

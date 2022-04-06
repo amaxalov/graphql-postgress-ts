@@ -7,3 +7,11 @@ export const ADD_SPELL = gql`
     }
   }
 `
+
+export const UPDATE_SPELL = gql`
+  mutation updateSpell($id: Int!, $name: String!, $learned: Boolean!, $mageId: Int!) {
+    updateSpell(id: $id, name: $name, learned: $learned, mageId: $mageId) {
+      name
+    }
+  }
+`

@@ -7,10 +7,11 @@ interface Props {
   name: Spell['name']
   mageName: Mage['name']
   learned: Spell['learned']
-  deleteHandler: (id: string) => void
+  updateHandler: (id: number) => void
+  deleteHandler: (id: number) => void
 }
 
-export const SpellsRow: React.FC<Props> = ({ id, name, mageName, learned, deleteHandler }) => (
+export const SpellsRow: React.FC<Props> = ({ id, name, mageName, learned, updateHandler, deleteHandler }) => (
   <tr>
     <td>{name}</td>
     <td>{mageName}</td>
@@ -18,7 +19,12 @@ export const SpellsRow: React.FC<Props> = ({ id, name, mageName, learned, delete
       <input type='checkbox' checked={learned} />
     </td>
     <td>
-      <button type='button' onClick={() => deleteHandler(id)}>
+      <button type='button' onClick={() => updateHandler(parseInt(id))}>
+        Edit
+      </button>
+    </td>
+    <td>
+      <button type='button' onClick={() => deleteHandler(parseInt(id))}>
         Delete
       </button>
     </td>

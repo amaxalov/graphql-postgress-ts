@@ -6,15 +6,21 @@ interface Props {
   id: Mage['id']
   name: Mage['name']
   age: Mage['age']
-  deleteHandler: (id: string) => void
+  updateHandler: (id: number) => void
+  deleteHandler: (id: number) => void
 }
 
-export const MagesRow: React.FC<Props> = ({ id, name, age, deleteHandler }) => (
+export const MagesRow: React.FC<Props> = ({ id, name, age, updateHandler, deleteHandler }) => (
   <tr>
     <td>{name}</td>
     <td>{age}</td>
     <td>
-      <button type='button' onClick={() => deleteHandler(id)}>
+      <button type='button' onClick={() => updateHandler(parseInt(id))}>
+        Edit
+      </button>
+    </td>
+    <td>
+      <button type='button' onClick={() => deleteHandler(parseInt(id))}>
         Delete
       </button>
     </td>

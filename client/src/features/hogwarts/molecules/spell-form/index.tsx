@@ -3,30 +3,48 @@ import { Btn } from '@/components/btn'
 import { useMutation, useQuery } from 'react-apollo'
 import { MAGES } from '../mage-table/queries'
 import { SPELLS } from '../spells-table/queries'
-import { ADD_SPELL } from './mutations'
+import { ADD_SPELL, UPDATE_SPELL } from './mutations'
+import { SPELL } from './queries'
 import * as Styled from './styled'
 
 interface Props {
   isOpen: boolean
+  id: number | void
   close: () => void
 }
 
-export const AddSpellModal: React.FC<Props> = ({ isOpen, close }) => {
+export const SpellForm: React.FC<Props> = ({ isOpen, id, close }) => {
   const { data: magesData, loading: magesLoading } = useQuery(MAGES)
+  const { data: spellData, loading: spellLoading } = useQuery(SPELL, { variables: { id }, skip: !id })
   const [addSpell] = useMutation(ADD_SPELL)
+  const [updateSpell] = useMutation(UPDATE_SPELL)
   const [name, setName] = React.useState('')
   const [mage, setMage] = React.useState('')
   const [isLearned, learned] = React.useState(false)
 
+  React.useEffect(() => {
+    setName(spellData?.spell.name)
+    learned(spellData?.spell.learned)
+    setMage(spellData?.spell.mage.id)
+  }, [spellData?.spell])
+
   if (!isOpen) return null
   if (magesLoading || !magesData) return null
+  if ((!spellData || spellLoading) && id) return null
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    addSpell({
-      variables: { name: name, learned: isLearned, mageId: parseInt(mage) },
-      refetchQueries: [{ query: SPELLS }],
-    })
+    if (id !== undefined) {
+      updateSpell({
+        variables: { id: id, name: name, learned: isLearned, mageId: parseInt(mage) },
+        refetchQueries: [{ query: SPELLS }],
+      })
+    } else {
+      addSpell({
+        variables: { name: name, learned: isLearned, mageId: parseInt(mage) },
+        refetchQueries: [{ query: SPELLS }],
+      })
+    }
     close()
   }
 

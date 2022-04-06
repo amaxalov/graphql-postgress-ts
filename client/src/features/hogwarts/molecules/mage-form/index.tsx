@@ -2,26 +2,40 @@ import * as React from 'react'
 import { useMutation, useQuery } from 'react-apollo'
 import { Btn } from '@/components/btn'
 import { MAGES } from '../mage-table/queries'
-import { ADD_MAGE } from './mutations'
+import { MAGE } from './queries'
+import { ADD_MAGE, UPDATE_MAGE } from './mutations'
 import * as Styled from './styled'
 
 interface Props {
   isOpen: boolean
+  id: number | void
   close: () => void
 }
 
-export const AddMageModal: React.FC<Props> = ({ isOpen, close }) => {
-  const { data: magesData, loading: magesLoading } = useQuery(MAGES)
+export const MageForm: React.FC<Props> = ({ isOpen, close, id }) => {
+  const { data: mageData, loading: mageLoading } = useQuery(MAGE, { variables: { id }, skip: !id })
   const [addMage] = useMutation(ADD_MAGE)
+  const [updateMage] = useMutation(UPDATE_MAGE)
   const [name, setName] = React.useState('')
   const [age, setAge] = React.useState(null)
+  React.useEffect(() => {
+    setName(mageData?.mage.name)
+    setAge(mageData?.mage.age)
+  }, [mageData?.mage])
 
   if (!isOpen) return null
-  if (magesLoading || !magesData) return null
+  if ((!mageData || mageLoading) && id) return null
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    addMage({ variables: { name: name, age: parseInt(age) }, refetchQueries: [{ query: MAGES }] })
+    if (id !== undefined) {
+      updateMage({
+        variables: { id: id, name: name, age: parseInt(age) },
+        refetchQueries: [{ query: MAGES }],
+      })
+    } else {
+      addMage({ variables: { name: name, age: parseInt(age) }, refetchQueries: [{ query: MAGES }] })
+    }
     close()
   }
 
