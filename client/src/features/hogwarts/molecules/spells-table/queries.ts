@@ -5,6 +5,7 @@ export const SPELLS = gql`
     spells {
       id
       name
+      learned
       mage {
         id
         name

@@ -1,6 +1,13 @@
 import styled from 'styled-components'
 
-export const Root = styled.table`
+export const Root = styled.div``
+
+export const BtnCont = styled.div`
+  text-align: center;
+  padding-bottom: 20px;
+`
+
+export const Table = styled.table`
   width: 100%;
   border: 1px solid #ddd;
   border-radius: 5px;

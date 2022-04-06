@@ -1,6 +1,7 @@
 import { Container } from '@/components/container'
 import * as React from 'react'
-import { Table } from '../../molecules/table'
+import { MageTable } from '../../molecules/mage-table'
+import { SpellsTable } from '../../molecules/spells-table'
 import * as Styled from './styled'
 
 export const Main: React.FC = () => {
@@ -24,9 +25,7 @@ export const Main: React.FC = () => {
         </Styled.Tab>
       </Styled.Tabs>
       <Container>
-        <Styled.Content>
-          <Table />
-        </Styled.Content>
+        <Styled.Content>{tab === 'spells' ? <SpellsTable /> : <MageTable />}</Styled.Content>
       </Container>
     </Styled.Root>
   )
