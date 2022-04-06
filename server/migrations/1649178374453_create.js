@@ -20,4 +20,7 @@ exports.up = (pgm) => {
   });
 };
 
-exports.down = (pgm) => {};
+exports.down = (pgm) => {
+  pgm.dropTable("mages")
+  pgm.dropTable("spells", { cascade: true })
+};

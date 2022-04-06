@@ -1,7 +1,8 @@
 import express = require("express");
-const { graphqlHTTP } = require("express-graphql");
-const schema = require("../schema/schema");
-const db = require("../db");
+import g = require("express-graphql");
+import cors = require("cors");
+import schema = require("../schema/schema");
+import db = require("../db");
 
 const app = express();
 const PORT = 3300;
@@ -14,9 +15,11 @@ app
     console.log(err);
   });
 
+app.use(cors());
+
 app.use(
   "/graphql",
-  graphqlHTTP({
+  g.graphqlHTTP({
     schema,
     graphiql: true,
   })

@@ -1,6 +1,6 @@
-const { Pool } = require("pg");
+import postres = require("pg");
 
-const pool = new Pool({
+const pool = new postres.Pool({
   user: "gqladmin",
   host: "localhost",
   database: "gqltest",
@@ -8,6 +8,6 @@ const pool = new Pool({
   port: 5432,
 });
 
-module.exports = {
-  query: (text, params) => pool.query(text, params),
+export = {
+  query: (text, params?) => pool.query(text, params),
 };

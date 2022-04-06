@@ -1,30 +1,21 @@
 import * as React from 'react'
+import { ApolloProvider } from 'react-apollo'
+import ApolloClient, { InMemoryCache } from 'apollo-boost'
 import { render } from 'react-dom'
-import { createGlobalStyle } from 'styled-components'
+import { GlobalStyles } from './styles/global'
 import { Main } from './features/hogwarts/organisms/main'
 
-const GlobalStyles = createGlobalStyle`
-  html,
-  body {
-    padding: 0;
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-`
+const client = new ApolloClient({
+  uri: 'http://localhost:3300/graphql',
+  cache: new InMemoryCache(),
+})
 
 export const Root: React.FC = () => (
   <React.StrictMode>
-    <GlobalStyles />
-    <Main />
+    <ApolloProvider client={client}>
+      <GlobalStyles />
+      <Main />
+    </ApolloProvider>
   </React.StrictMode>
 )
 

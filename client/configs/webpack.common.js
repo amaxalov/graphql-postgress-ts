@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
@@ -56,9 +57,7 @@ module.exports = {
     rules: [
       {
         test: /\.(ts|js)x?$/,
-        use: [
-          'babel-loader',
-        ],
+        use: ['babel-loader'],
         exclude: /node_modules/,
       },
       {

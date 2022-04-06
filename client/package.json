@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --config ./configs/webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config ./configs/webpack.prod.js",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --color --open --config ./configs/webpack.dev.js",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --color --config ./configs/webpack.dev.js",
     "stats": "webpack --config ./configs/webpack.prod.js --json > stats.json && webpack-bundle-analyzer stats.json",
     "test": "jest"
   },
